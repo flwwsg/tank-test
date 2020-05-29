@@ -6,7 +6,6 @@ from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
 import time
 import os
-import getSize
 from selenium.webdriver.support.wait import WebDriverWait
 desired_caps = {
     'platformName':"Android",
