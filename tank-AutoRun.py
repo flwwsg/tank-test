@@ -68,22 +68,25 @@ def swipRight():
 
 def swipUp():
     U = get_size()
-    y1 = int(U[0]*0.8)
-    y2 = int(U[1]*0.2)
-    x1 = int(U[0]*0.2)
-    driver.swipe(x1,y1,x1,y2,1000)
+    y1 = int(U[0] * 0.8)
+    y2 = int(U[1] * 0.2)
+    x1 = int(U[0] * 0.2)
+    driver.swipe(x1, y1, x1, y2, 1000)
+
 
 def swipDown():
     U = get_size()
-    y1 = int(U[0]*0.2)
-    y2 = int(U[1]*0.8)
-    x1 = int(U[0]*0.2)
-    driver.swipe(x1,y1,x1,y2,1000)
+    y1 = int(U[0] * 0.2)
+    y2 = int(U[1] * 0.8)
+    x1 = int(U[0] * 0.2)
+    driver.swipe(x1, y1, x1, y2, 1000)
+
+
 # 滑动app起始页，4页
 for i in range(4):
     # 调用左滑方法
     swipLeft()
     sleep(0.5)
-#点击“立即开始”按钮
+# 点击“立即开始”按钮
 TouchAction(driver).tap(x=528, y=1616).perform()
-my=driver.find_element_by_xpath()
+my = driver.find_element_by_xpath()

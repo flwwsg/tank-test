@@ -4,13 +4,11 @@
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
 import time
-caps = {}
-caps["platformName"] = "Android"
-caps["deviceName"] = "127.0.0.1:5555"
-caps["app"] = "D:\\aPackage\\app-release (90).apk"
-#caps["noRest"] = True
+
+caps = {"platformName": "Android", "deviceName": "127.0.0.1:5555", "app": "D:\\aPackage\\app-release (90).apk"}
+# caps["noRest"] = True
 driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
-#TouchAction(driver).press(x=939, y=956).perform()
+# TouchAction(driver).press(x=939, y=956).perform()
 time.sleep(1)
 TouchAction(driver).press(x=938, y=956).move_to(x=259, y=956).release().perform()
 TouchAction(driver).press(x=938, y=956).move_to(x=238, y=956).release().perform()
@@ -45,7 +43,7 @@ TouchAction(driver).tap(x=1002, y=1151).perform()
 TouchAction(driver).press(x=891, y=1459).move_to(x=854, y=724).release().perform()
 el1 = driver.find_element_by_xpath(
     "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[1]/android.view.View/android.view.View/android.view.View[2]/android.view.View[22]/android.widget.Image")
-#driver.implicitly_wait(4)
+# driver.implicitly_wait(4)
 el1.click()
 time.sleep(4)
 TouchAction(driver).tap(x=564, y=1581).perform()

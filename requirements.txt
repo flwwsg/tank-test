@@ -1,0 +1,14 @@
+Appium-Python-Client==1.0.1
+certifi==2020.4.5.2
+cffi==1.14.0
+chardet==3.0.4
+gevent==20.6.2
+greenlet==0.4.16
+grequests==0.6.0
+idna==2.9
+pycparser==2.20
+requests==2.24.0
+selenium==3.141.0
+urllib3==1.25.9
+zope.event==4.4
+zope.interface==5.1.0
