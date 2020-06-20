@@ -32,5 +32,16 @@ bat 命令：
 cd /d C:\Users\%username%\AppData\Local\Android\Sdk\emulator 
 .\emulator -avd Pixel_2_API_26
 pause
-
 ```
+
+### 启动 appium inspector
+- 安装 appium desktop
+- 启动服务器后，点击放大镜按钮
+- Desired Capabilities -> JSON Representation 中输入
+```json
+{
+  "platformName": "android",
+  "platformVersion": "8"
+}
+``` 
+- 点击 start session

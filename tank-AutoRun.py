@@ -12,7 +12,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 debug_apk = os.path.join(os.path.dirname(__file__), "app-debug.apk")
 desired_caps = {
     'platformName': "Android",
-    'platfromVersion': "8",
+    'platformVersion': "8",
     # 'deviceName': "emulator-5554",
     'deviceName': "Android Emulator",
     'appPackage': "com.huyang.test",
@@ -93,4 +93,4 @@ for i in range(4):
     swipLeft()
     sleep(0.5)
 # 点击“立即开始”按钮
-TouchAction(driver).tap(x=528, y=1616).perform()
+driver.find_element_by_class_name("android.widget.Button").click()
