@@ -21,7 +21,7 @@ ref: http://appium.io/docs/en/drivers/android-uiautomator2/index.html#requiremen
 
 ### 启动 android emulator
 
-**所有操作需要管理员权限**
+**所有操作需要管理员权限，否则会出现没有连接不好 5037 端口错误**
 
 列出虚拟机 %username% 是当前用户名。
 - cd C:\Users\%username%\AppData\Local\Android\Sdk\emulator -list-avds
