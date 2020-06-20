@@ -94,3 +94,5 @@ for i in range(4):
     sleep(0.5)
 # 点击“立即开始”按钮
 driver.find_element_by_class_name("android.widget.Button").click()
+sleep(5)
+driver.quit()
