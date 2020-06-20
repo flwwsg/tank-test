@@ -26,3 +26,11 @@ ref: http://appium.io/docs/en/drivers/android-uiautomator2/index.html#requiremen
 列出虚拟机 %username% 是当前用户名。
 - cd C:\Users\%username%\AppData\Local\Android\Sdk\emulator -list-avds
 - 从列出的虚拟中选择其中一个虚拟机名。C:\Users\%username%\AppData\Local\Android\Sdk\emulator -avd 选择的虚拟机名字
+
+bat 命令：
+```cmd
+cd /d C:\Users\%username%\AppData\Local\Android\Sdk\emulator 
+.\emulator -avd Pixel_2_API_26
+pause
+
+```
