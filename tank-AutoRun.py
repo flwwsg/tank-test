@@ -87,6 +87,15 @@ def swipDown():
     driver.swipe(x1, y1, x1, y2, 1000)
 
 
+# 根据类型、文本查找元素
+def find_element_by_text(class_name, text):
+    text_views = driver.find_elements_by_class_name(class_name)
+    for text_view in text_views:
+        if text_view.text == text:
+            return text_view
+    return None
+
+
 # 滑动app起始页，4页
 for i in range(4):
     # 调用左滑方法
@@ -94,3 +103,33 @@ for i in range(4):
     sleep(0.5)
 # 点击“立即开始”按钮
 driver.find_element_by_class_name("android.widget.Button").click()
+# 等待 dom 生成
+sleep(0.5)
+# 进入登录界面
+enter_login = find_element_by_text("android.view.View", "云钱包请先登录云钱包")
+if enter_login is not None:
+    enter_login.click()
+    sleep(0.5)
+else:
+    print("invalid login view")
+
+# 登录
+views = driver.find_elements_by_class_name("android.widget.EditText")
+if len(views) != 3:
+    print("error get text input number")
+else:
+    account = views[0]
+    password = views[1]
+    verify_code = views[2]
+    account.send_keys("13072374137")
+    password.send_keys("123456aa")
+    verify_code.send_keys("00")
+# 查找登录按钮
+login_btn = find_element_by_text("android.widget.Button", "Log in")
+if login_btn is not None:
+    login_btn.click()
+else:
+    print("invalid login button")
+
+sleep(30)
+
