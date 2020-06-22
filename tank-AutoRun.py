@@ -1,7 +1,3 @@
-# -*- coding: utf-8 -*-
-# This sample code uses the Appium python client
-# pip install Appium-Python-Client
-# Then you can paste this into a file and simply run with Python
 from appium import webdriver
 from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
@@ -31,7 +27,7 @@ driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
 # driver.implicitly_wait(5) #隐式等待，5s里找到元素就开始执行 time.sleep(5)必须等待5s才开始执行
 # WebDriverWait(driver,6).until(lambda x:x.find_element_by_id('com.mymoney:id/next_btn'))
 # 向左滑动4次，跳转引导页,调用swip方法，需要添加time.sleep(s)等待时间，否则会报错
-time.sleep(1)
+# time.sleep(1)
 
 
 def touch_tap(self, x, y, duration=100):  # 点击坐标  ,x1,x2,y1,y2,duration
@@ -97,10 +93,24 @@ def find_element_by_text(class_name, text):
     return None
 
 
-# 等待 app 启动
-sleep(5)
+# 等待 dom 生成后，再查找元素
+def wait_element_by_class_name_and_text(class_name, text, timeout=10):
+    driver.implicitly_wait(timeout)
+    text_views = driver.find_elements_by_class_name(class_name)
+    for text_view in text_views:
+        if text_view.text == text:
+            return text_view
+    return None
+
+
+# 等待并查找元素
+def wait_element_by_class_name(class_name, timeout=10):
+    driver.implicitly_wait(timeout)
+    return driver.find_elements_by_class_name(class_name)
+
+
 # 是不是第一次启动
-first_init = find_element_by_text("android.view.View", "引导图")
+first_init = wait_element_by_class_name_and_text("android.view.View", "引导图")
 if first_init is not None:
     # 滑动app起始页，4页
     for i in range(4):
@@ -110,18 +120,16 @@ if first_init is not None:
     # 点击“立即开始”按钮
     driver.find_element_by_class_name("android.widget.Button").click()
 
-# 等待 dom 生成
-sleep(0.5)
+
 # 进入登录界面
-enter_login = find_element_by_text("android.view.View", "云钱包请先登录云钱包")
+enter_login = wait_element_by_class_name_and_text("android.view.View", "云钱包请先登录云钱包")
 if enter_login is not None:
     enter_login.click()
-    sleep(0.5)
 else:
     print("invalid login view")
 
 # 登录
-views = driver.find_elements_by_class_name("android.widget.EditText")
+views = wait_element_by_class_name("android.widget.EditText")
 if len(views) != 3:
     print("error get text input number")
 else:
@@ -132,7 +140,7 @@ else:
     password.send_keys("123456aa")
     verify_code.send_keys("00")
 # 查找登录按钮
-login_btn = find_element_by_text("android.widget.Button", "Log in")
+login_btn = wait_element_by_class_name_and_text("android.widget.Button", "Log in")
 if login_btn is not None:
     login_btn.click()
 else:
