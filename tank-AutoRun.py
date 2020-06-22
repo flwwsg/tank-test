@@ -8,6 +8,7 @@ from time import sleep
 import time
 import os
 from selenium.webdriver.support.wait import WebDriverWait
+
 # 需要安装的 apk 包(debug版)，放到当前目录
 debug_apk = os.path.join(os.path.dirname(__file__), "app-debug.apk")
 desired_caps = {
@@ -22,7 +23,7 @@ desired_caps = {
     'app': debug_apk,
     'unicodeKeyboard': True,  # 使用unicodeKeyboard,即Appiuum自带键盘
     'resetKeyboard': True,  # 重新设置系统键盘为Appium自带键盘pip
-    # 'noReset': True  # 每次启动不重置APP,即不执行清空APP数据操作
+    'noReset': True  # 每次启动不重置APP,即不执行清空APP数据操作
     # 'udid':"emulator-5554"
 
 }
@@ -96,13 +97,19 @@ def find_element_by_text(class_name, text):
     return None
 
 
-# 滑动app起始页，4页
-for i in range(4):
-    # 调用左滑方法
-    swipLeft()
-    sleep(0.5)
-# 点击“立即开始”按钮
-driver.find_element_by_class_name("android.widget.Button").click()
+# 等待 app 启动
+sleep(5)
+# 是不是第一次启动
+first_init = find_element_by_text("android.view.View", "引导图")
+if first_init is not None:
+    # 滑动app起始页，4页
+    for i in range(4):
+        # 调用左滑方法
+        swipLeft()
+        sleep(0.5)
+    # 点击“立即开始”按钮
+    driver.find_element_by_class_name("android.widget.Button").click()
+
 # 等待 dom 生成
 sleep(0.5)
 # 进入登录界面
@@ -132,4 +139,3 @@ else:
     print("invalid login button")
 
 sleep(30)
-
