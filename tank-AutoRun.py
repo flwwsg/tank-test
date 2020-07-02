@@ -19,7 +19,7 @@ desired_caps = {
     'app': debug_apk,
     'unicodeKeyboard': True,  # 使用unicodeKeyboard,即Appiuum自带键盘
     'resetKeyboard': True,  # 重新设置系统键盘为Appium自带键盘pip
-    # 'noReset': True  # 每次启动不重置APP,即不执行清空APP数据操作
+    'noReset': True  # 每次启动不重置APP,即不执行清空APP数据操作
     # 'udid':"emulator-5554"
 
 }
@@ -27,7 +27,6 @@ driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
 # driver.implicitly_wait(5) #隐式等待，5s里找到元素就开始执行 time.sleep(5)必须等待5s才开始执行
 # WebDriverWait(driver,6).until(lambda x:x.find_element_by_id('com.mymoney:id/next_btn'))
 # 向左滑动4次，跳转引导页,调用swip方法，需要添加time.sleep(s)等待时间，否则会报错
-# time.sleep(1)
 
 
 def touch_tap(self, x, y, duration=100):  # 点击坐标  ,x1,x2,y1,y2,duration
@@ -119,8 +118,9 @@ def wait_element_by_class_name(class_name, timeout=10):
     return driver.find_elements_by_class_name(class_name)
 
 
-# 进入登录界面
-enter_login = wait_element_by_class_name_and_text("android.view.View", "云钱包请先登录云钱包")
+# 进入登录界面, 等待启动成功
+sleep(20)
+enter_login = find_element_by_class_and_text("android.view.View", "云钱包请先登录云钱包")
 if enter_login is not None:
     enter_login.click()
 else:
