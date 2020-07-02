@@ -19,7 +19,7 @@ desired_caps = {
     'app': debug_apk,
     'unicodeKeyboard': True,  # 使用unicodeKeyboard,即Appiuum自带键盘
     'resetKeyboard': True,  # 重新设置系统键盘为Appium自带键盘pip
-    'noReset': True  # 每次启动不重置APP,即不执行清空APP数据操作
+    # 'noReset': True  # 每次启动不重置APP,即不执行清空APP数据操作
     # 'udid':"emulator-5554"
 
 }
@@ -85,7 +85,7 @@ def swipDown():
 
 
 # 根据类型、文本查找元素
-def find_element_by_text(class_name, text):
+def find_element_by_class_and_text(class_name, text):
     text_views = driver.find_elements_by_class_name(class_name)
     for text_view in text_views:
         if text_view.text == text:
@@ -103,22 +103,20 @@ def wait_element_by_class_name_and_text(class_name, text, timeout=10):
     return None
 
 
+# # 查找文本列表
+# def wait_element_by_class_name_and_text_list(class_name, text_list, timeout=10):
+#     driver.implicitly_wait(timeout)
+#     text_views = driver.find_elements_by_class_name(class_name)
+#     for text_view in text_views:
+#         if text_view.text in text_list:
+#             return text_view
+#     return None
+
+
 # 等待并查找元素
 def wait_element_by_class_name(class_name, timeout=10):
     driver.implicitly_wait(timeout)
     return driver.find_elements_by_class_name(class_name)
-
-
-# 是不是第一次启动
-first_init = wait_element_by_class_name_and_text("android.view.View", "引导图")
-if first_init is not None:
-    # 滑动app起始页，4页
-    for i in range(4):
-        # 调用左滑方法
-        swipLeft()
-        sleep(0.5)
-    # 点击“立即开始”按钮
-    driver.find_element_by_class_name("android.widget.Button").click()
 
 
 # 进入登录界面
@@ -126,7 +124,17 @@ enter_login = wait_element_by_class_name_and_text("android.view.View", "云钱�
 if enter_login is not None:
     enter_login.click()
 else:
-    print("invalid login view")
+    # 第一次启动
+    print("first install")
+    # 滑动app起始页，4页
+    for i in range(3):
+        # 调用左滑方法
+        swipLeft()
+        sleep(0.5)
+    # 点击“立即开始”按钮
+    driver.find_element_by_class_name("android.widget.Button").click()
+    sleep(0.5)
+    wait_element_by_class_name_and_text("android.view.View", "云钱包请先登录云钱包").click()
 
 # 登录
 views = wait_element_by_class_name("android.widget.EditText")
