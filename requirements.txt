@@ -1,5 +1,5 @@
 Appium-Python-Client==1.0.1
-certifi==2020.4.5.2
+certifi==2022.12.7
 cffi==1.14.0
 chardet==3.0.4
 gevent==20.6.2
